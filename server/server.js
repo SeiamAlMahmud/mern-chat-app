@@ -15,6 +15,6 @@ app.get("/",(req, res) =>{
     res.send("first")
 })
 app.listen(port, (req,res)=>{
-    console.log("port start on " + port);
     connectDB()
+    console.log("port start on " + port);
 })
