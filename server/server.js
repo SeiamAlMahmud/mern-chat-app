@@ -4,6 +4,7 @@ import authRouter from './route/auth.route.js';
 import { connectDB } from './config/db.js';
 import messageRouter from './route/messageRouter.js';
 import cookieParser from 'cookie-parser';
+import userRouter from './route/userRouter.js';
 
 
 const app = express();
@@ -18,6 +19,7 @@ app.use(cookieParser())
 //endPoint
 app.use("/api/auth",authRouter)
 app.use("/api/messages",messageRouter)
+app.use("/api/users",userRouter)
 
 app.get("/",(req, res) =>{
     res.send("first")
