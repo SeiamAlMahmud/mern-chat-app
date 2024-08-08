@@ -2,14 +2,22 @@ import express from 'express';
 import "dotenv/config"
 import authRouter from './route/auth.route.js';
 import { connectDB } from './config/db.js';
+import messageRouter from './route/messageRouter.js';
+import cookieParser from 'cookie-parser';
+
+
 const app = express();
-app.use(express.json()) //to parse the incomming requests  with JSON Playloads (from req.body)
 const port = process.env.PORT || 3000;
+
+
+app.use(express.json()) //to parse the incomming requests  with JSON Playloads (from req.body)
+app.use(cookieParser())
 
 
 
 //endPoint
 app.use("/api/auth",authRouter)
+app.use("/api/messages",messageRouter)
 
 app.get("/",(req, res) =>{
     res.send("first")
