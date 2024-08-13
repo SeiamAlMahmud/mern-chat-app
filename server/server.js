@@ -5,6 +5,7 @@ import { connectDB } from './config/db.js';
 import messageRouter from './route/messageRouter.js';
 import cookieParser from 'cookie-parser';
 import userRouter from './route/userRouter.js';
+import cors from 'cors'
 
 
 const app = express();
@@ -13,6 +14,7 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json()) //to parse the incomming requests  with JSON Playloads (from req.body)
 app.use(cookieParser())
+app.use(cors())
 
 
 

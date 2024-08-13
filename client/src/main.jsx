@@ -6,11 +6,14 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import { Toaster } from 'react-hot-toast';
 import Root from './Foundation/Root.jsx';
 import ErrorPage from './Foundation/ErrorPage.jsx';
 import Home from './pages/Home/Home.jsx';
 import Login from './pages/Login/Login.jsx';
 import Signup from './pages/Signup/Signup.jsx';
+import { AuthContextProvider } from './context/AuthContext.jsx';
+
 
 const router = createBrowserRouter([
   {
@@ -28,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/signup",
-        element: <Signup />,
+        element:( <Signup />),
       },
     ],
   },
@@ -36,6 +39,11 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
- <RouterProvider router={router} />
-   </React.StrictMode>,
+    <AuthContextProvider>
+      <Toaster
+        position="top-right"
+        reverseOrder={false} />
+      <RouterProvider router={router} />
+    </AuthContextProvider>
+  </React.StrictMode>,
 )
