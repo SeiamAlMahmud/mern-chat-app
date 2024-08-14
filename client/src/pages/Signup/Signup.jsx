@@ -8,7 +8,7 @@ import { useAuthContext } from '../../context/AuthContext';
 
 const Signup = () => {
   document.title = 'Signup';
-  const [Loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
   const { authUser, setAuthUser, data, setData } = useAuthContext()
   const navigate = useNavigate()
   const location = useLocation()
@@ -26,12 +26,12 @@ const Signup = () => {
     setInputs({ ...inputs, gender })
   }
   // console.log(form, location.pathname)
-  useEffect(()=>{
-
-    if ( localStorage.getItem("chat-user")) {
-     navigate(form || "/") 
+  useEffect(() => {
+    if (localStorage.getItem("chat-user")) {
+      navigate("/")
     }
-  },[])
+  }, [])
+
   const handleOnSubmit = async (e) => {
     e.preventDefault()
 
@@ -95,7 +95,12 @@ const Signup = () => {
         toast.success("User Create Successfully")
       }
       if (!response.data?.error) {
-        navigate("/")
+        if (form) {
+          navigate(form || "/")
+            
+          }else{
+            navigate("/")
+          }
       }
     } catch (error) {
       // if (error.response) {
@@ -183,7 +188,7 @@ const Signup = () => {
           <Gendercheckbox handleCheckboxChange={handleCheckboxChange} selectedGender={inputs.gender} />
           <NavLink to={"/login"} className='text-sm hover:underline hover:text-blue-500 mt-2 inline-block text-white'>Already have an account? </NavLink>
           <div className='pt-2'>
-            <button type='submit' className="btn btn-block btn-sm ">Sign up</button>
+            <button type='submit' className="btn btn-block btn-sm " disabled={loading}>{loading ? <span className="loading loading-spinner"></span> : "Sign up"}</button>
           </div>
         </form>
       </div>
