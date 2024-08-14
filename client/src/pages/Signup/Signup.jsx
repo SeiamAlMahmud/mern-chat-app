@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import Gendercheckbox from '../../components/Gendercheckbox'
 import toast from 'react-hot-toast';
 import { useAuthContext } from '../../context/AuthContext';
@@ -11,6 +11,9 @@ const Signup = () => {
   const [Loading, setLoading] = useState(false)
   const { authUser, setAuthUser, data, setData } = useAuthContext()
   const navigate = useNavigate()
+  const location = useLocation()
+  const [searchParams, setSearchParams] = useSearchParams();
+  const form = searchParams.get('form');
   const [inputs, setInputs] = useState({
     fullName: '',
     username: '',
@@ -22,8 +25,14 @@ const Signup = () => {
   const handleCheckboxChange = (gender) => {
     setInputs({ ...inputs, gender })
   }
+  // console.log(form, location.pathname)
+  useEffect(()=>{
 
-  const handleOnSubmit =async (e) => {
+    if ( localStorage.getItem("chat-user")) {
+     navigate(form || "/") 
+    }
+  },[])
+  const handleOnSubmit = async (e) => {
     e.preventDefault()
 
     const { fullName, username, email, gender, password, confirmPassword } = inputs;
@@ -46,12 +55,12 @@ const Signup = () => {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       return emailRegex.test(mail);
     }
-    
+
     if (!isValidEmail(email)) {
       toast.error("Email is invalid");
       return;
-    } 
-    
+    }
+
 
     setLoading(true);
     try {
@@ -72,7 +81,7 @@ const Signup = () => {
         password,
         confirmPassword
       });
-      
+
       setData(response.data);
       if (response.data?.error) {
         throw new Error(response.data?.error)
@@ -86,7 +95,7 @@ const Signup = () => {
         toast.success("User Create Successfully")
       }
       if (!response.data?.error) {
-        // navigate("/")
+        navigate("/")
       }
     } catch (error) {
       // if (error.response) {
@@ -99,26 +108,26 @@ const Signup = () => {
 
       if (error.response) {
         switch (error.response.status) {
-        case 400:
-          // Custom error message from the server
-          toast.error(error.response.data?.error || 'Bad Request');
-          break;
-        case 401:
-          toast.error(error.response.data?.error || 'Unauthorized access');
-          break;
-        case 403:
-          toast.error(error.response.data?.error || 'Forbidden: You donât have permission');
-          break;
-        case 404:
-          toast.error(error.response.data?.error || 'Resource not found');
-          break;
-        case 500:
-          toast.error(error.response.data?.error || 'Internal server error');
-          break;
-        default:
-          toast.error(error.response.data?.error || 'An unexpected error occurred');
-      }
-      }else if (error.request) {
+          case 400:
+            // Custom error message from the server
+            toast.error(error.response.data?.error || 'Bad Request');
+            break;
+          case 401:
+            toast.error(error.response.data?.error || 'Unauthorized access');
+            break;
+          case 403:
+            toast.error(error.response.data?.error || 'Forbidden: You donât have permission');
+            break;
+          case 404:
+            toast.error(error.response.data?.error || 'Resource not found');
+            break;
+          case 500:
+            toast.error(error.response.data?.error || 'Internal server error');
+            break;
+          default:
+            toast.error(error.response.data?.error || 'An unexpected error occurred');
+        }
+      } else if (error.request) {
         toast.error('No response from server');
       } else {
         toast.error(`Error: ${error.message}`);

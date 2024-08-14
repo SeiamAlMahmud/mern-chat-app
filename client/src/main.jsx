@@ -13,6 +13,7 @@ import Home from './pages/Home/Home.jsx';
 import Login from './pages/Login/Login.jsx';
 import Signup from './pages/Signup/Signup.jsx';
 import { AuthContextProvider } from './context/AuthContext.jsx';
+import PrivateRoute from './Foundation/PrivateRoute.jsx';
 
 
 const router = createBrowserRouter([
@@ -23,15 +24,27 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: (
+          <PrivateRoute>
+            <Home />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",
-        element: <Login />,
+        element: (
+          <PrivateRoute>
+            <Login />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/signup",
-        element:( <Signup />),
+        element: (
+          <PrivateRoute>
+            <Signup />
+          </PrivateRoute>
+        ),
       },
     ],
   },
