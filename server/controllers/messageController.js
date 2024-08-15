@@ -57,9 +57,9 @@ const getMessage = async (req, res) => {
         }).populate("messages"); // NOT REFERENCE BUT ACTUAL MESSAGES 
 
         if (!conversation) {
-            res.status(200).json([])
+          return  res.status(404).json([])
         }
-        const messages = conversation.messages
+        const messages = conversation?.messages
         res.status(200).json(messages)
 
 

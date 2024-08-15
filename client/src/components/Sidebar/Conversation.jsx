@@ -7,7 +7,7 @@ const Conversation = ({ conversation, lastIndex }) => {
     
     // console.log(selectedConversation)
     
-    return (
+    return ( 
         <>
             <div className={`flex gap-2 items-center hover:bg-sky-500 p-2 py-1 rounded cursor-pointer ${isSelected ? 'bg-sky-500' : ''}`} onClick={()=> setSelectedConversation(conversation)}>
                 <div className={`avatar online`}>
