@@ -59,7 +59,7 @@ const Message = ({ items }) => {
                         <img src={profilePic} alt="Tailwind Css Bubble Component" />
                     </div>
                 </div>
-                <div className={`text-white  chat-bubble ${bubbleBgColor}`}>{items?.message}</div>
+                <div className={`text-white  chat-bubble  pb-2 ${bubbleBgColor}`}>{items?.message}</div>
                 <div className="flex gap-1 opacity-50 items-center chat-footer text-xs mt-1">{formatTimestamp(items.createdAt)}</div>
                 
             </div>
