@@ -14,6 +14,7 @@ import Login from './pages/Login/Login.jsx';
 import Signup from './pages/Signup/Signup.jsx';
 import { AuthContextProvider } from './context/AuthContext.jsx';
 import PrivateRoute from './Foundation/PrivateRoute.jsx';
+import { SocketContextProvider } from './context/SocketContext.jsx';
 
 
 const router = createBrowserRouter([
@@ -43,10 +44,12 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthContextProvider>
+      <SocketContextProvider>
       <Toaster
         position="top-right"
         reverseOrder={false} />
       <RouterProvider router={router} />
+        </SocketContextProvider>
     </AuthContextProvider>
   </React.StrictMode>,
 )
