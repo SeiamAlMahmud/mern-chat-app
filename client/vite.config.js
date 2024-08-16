@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     port: "5173", // make a custom port for vite
     proxy: {
-      "/api": "https://mern-chat-app-y0qi.onrender.com/", // make a custom port for fetch request
+      "/api": "http://localhost:3000", // make a custom port for fetch request
     }
   }
 })
