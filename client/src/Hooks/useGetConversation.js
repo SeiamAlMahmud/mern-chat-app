@@ -28,7 +28,7 @@ const useGetConversation = () => {
               toast.error(error.response.data?.error || 'Bad Request');
               break;
             case 401:
-              toast.error(error.response.data?.error || 'Unauthorized access');
+              console.log(error.response.data?.error || 'Unauthorized access');
               break;
             case 403:
               toast.error(error.response.data?.error || 'Forbidden: You donât have permission');
