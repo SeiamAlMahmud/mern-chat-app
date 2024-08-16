@@ -5,6 +5,8 @@ const useConversation = create((set) => ({
     setSelectedConversation: (selectedConversation) => set({ selectedConversation }),
     messages: [],
     setMessage: (messages) => set({ messages }),
+    clearMessages: () => set({ messages: [] }) // Add this function to clear the messages array
+
 }))
 
 export default useConversation

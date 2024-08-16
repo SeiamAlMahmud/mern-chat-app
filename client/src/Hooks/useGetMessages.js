@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 const useGetMessages = () => {
     const [loading, setLoading] = useState(false)
 
-    const { selectedConversation, messages, setMessage } = useConversation()
+    const { selectedConversation, messages, setMessage, clearMessages } = useConversation()
   
 
     
@@ -16,7 +16,7 @@ const useGetMessages = () => {
 
             setLoading(true)
             try {
-
+                clearMessages()
                 const response = await axios.get(`/api/messages/${selectedConversation?._id}`)
                 
                 
