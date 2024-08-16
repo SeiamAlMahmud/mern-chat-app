@@ -16,7 +16,12 @@ const MessageContainer = () => {
   }, [])
 
   const { authUser } = useAuthContext()
-  const objectAuthUser = authUser?.fullName || ""
+  let objectAuthUser;
+  if (authUser?.fullname) {
+    objectAuthUser = authUser.fullName;
+  }else{
+    objectAuthUser = " "
+  }
   const NoChatSelected = () => {
     return (
       <div className=" flex items-center justify-center h-full w-full ">

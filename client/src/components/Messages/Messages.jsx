@@ -3,12 +3,13 @@ import Message from './Message'
 import useGetMessages from '../../Hooks/useGetMessages'
 import MessageSkeleton from '../messageSkeleton/MessageSkeleton'
 import useConversation from '../../zustand/useConversation'
+import useListenMessages from '../../Hooks/useListenMessages'
 
 const Messages = () => {
   const { loading, messages } = useGetMessages()
   const { selectedConversation, setMessage } = useConversation()
   console.log(messages, "messages")
-
+  useListenMessages()
   const messageRef = useRef(null);
 
   // ############## smoothly scrolling with speed control ############# 
