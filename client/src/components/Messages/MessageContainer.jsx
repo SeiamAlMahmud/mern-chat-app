@@ -28,7 +28,8 @@ const MessageContainer = () => {
         <div className='text-center px-4 sm:text-lg md:text-xl text-gray-200 font-semibold flex flex-col items-center gap-2'>
           <p>Welcome {objectAuthUser} * </p>
           <p>Select a chat to start messaging.</p>
-          <TiMessages className='text-center text-3xl md:text-6xl' />
+          {/* <TiMessages className='text-center text-3xl md:text-6xl' /> */}
+          <p className='text-center text-lg'>Send</p>
         </div>
       </div>
     )
