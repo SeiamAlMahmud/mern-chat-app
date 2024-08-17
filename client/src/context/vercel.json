@@ -15,8 +15,8 @@
     ],
     "routes": [
       {
-        "src": "/",
-        "dest": "client/dist/index.html"
+        "src": "/(.*)",
+        "dest": "./client/dist/index.html"
       },
       {
         "src": "/(.*)",
